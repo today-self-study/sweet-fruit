@@ -13,20 +13,18 @@ Visit: https://today-self-study.github.io/sweet-fruit/
   - Agent 2: Analyzes ripeness and quality
   - Agent 3: Estimates sweetness (0-100 scale)
 - **100% Client-Side**: No backend server, runs entirely in your browser
-- **Privacy-First**: Your API key and images never leave your device
+- **Privacy-First**: Images are processed securely and never stored
 - **Mobile-Optimized**: Works great on phones and tablets
 - **PWA Support**: Install as an app on your device
-- **Free to Use**: Get $5 in free Anthropic credits (~2,500 analyses)
+- **No Setup Required**: Start analyzing fruits immediately
 
 ## How to Use
 
 1. Visit the app at https://today-self-study.github.io/sweet-fruit/
-2. Get your free API key from [Anthropic Console](https://console.anthropic.com/)
-   - Sign up for a free account
-   - Get $5 in free credits (~2,500 fruit analyses)
-3. Enter your API key (stored securely in your browser)
-4. Take or upload a photo of any fruit
-5. Get instant sweetness analysis!
+2. Take or upload a photo of any fruit
+3. Get instant sweetness analysis!
+
+The app is ready to use immediately - no setup or API key required!
 
 ## Supported Fruits
 
@@ -92,7 +90,7 @@ The app uses a sophisticated multi-agent architecture:
 - No backend server required
 - Direct API calls to Anthropic from browser
 - All processing happens on your device
-- Your images and API key never leave your browser
+- Images are processed in real-time and never stored
 
 ## Cost Analysis
 
@@ -103,10 +101,10 @@ The app uses a sophisticated multi-agent architecture:
 
 ## Privacy
 
-- Your API key is stored only in your browser's localStorage
-- Images are processed locally and sent directly to Anthropic
-- No data is sent to our servers
-- You can clear your API key at any time
+- Images are processed in real-time and never stored
+- All processing happens client-side in your browser
+- No personal data is collected or tracked
+- Completely anonymous usage
 
 ## Documentation
 

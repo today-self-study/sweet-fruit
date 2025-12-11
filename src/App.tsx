@@ -1,64 +1,38 @@
-import { useState } from 'react';
-import { useApiKey } from './hooks/useApiKey';
 import { useAgentAnalysis } from './hooks/useAgentAnalysis';
-import { ApiKeyInput } from './components/Settings/ApiKeyInput';
 import { CameraView } from './components/Camera/CameraView';
 import { LoadingView } from './components/Results/LoadingView';
 import { ResultView } from './components/Results/ResultView';
 
-type AppState = 'api-key' | 'camera' | 'analyzing' | 'results';
+type AppState = 'camera' | 'analyzing' | 'results';
+
+// Use embedded API key from environment variable
+const API_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY || '';
 
 function App() {
-  const { apiKey, hasApiKey, setApiKey } = useApiKey();
   const { analyze, result, progress, isAnalyzing, error, reset } =
-    useAgentAnalysis(apiKey);
-
-  const [, setAppState] = useState<AppState>('api-key');
-  const [apiKeyError, setApiKeyError] = useState<string | null>(null);
+    useAgentAnalysis(API_KEY);
 
   // Determine current state
   const currentState: AppState = (() => {
-    if (!hasApiKey) return 'api-key';
     if (isAnalyzing) return 'analyzing';
     if (result) return 'results';
     return 'camera';
   })();
 
-  const handleApiKeySubmit = (key: string) => {
-    const success = setApiKey(key);
-    if (success) {
-      setApiKeyError(null);
-      setAppState('camera');
-    } else {
-      setApiKeyError('Invalid API key format. Must start with sk-ant-');
-    }
-  };
-
   const handleImageCapture = async (imageData: string) => {
-    setAppState('analyzing');
     try {
       await analyze(imageData);
-      setAppState('results');
     } catch (err) {
-      setAppState('camera');
+      // Error is handled by useAgentAnalysis hook
+      console.error('Analysis failed:', err);
     }
   };
 
   const handleReset = () => {
     reset();
-    setAppState('camera');
   };
 
   // Render based on state
-  if (currentState === 'api-key') {
-    return (
-      <ApiKeyInput
-        onSubmit={handleApiKeySubmit}
-        error={apiKeyError || undefined}
-      />
-    );
-  }
-
   if (currentState === 'analyzing') {
     return <LoadingView progress={progress} />;
   }
