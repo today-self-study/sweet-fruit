@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Loader2 } from 'lucide-react';
 import { OrchestratorProgress } from '../../types/agent';
 
@@ -6,6 +7,8 @@ interface LoadingViewProps {
 }
 
 export function LoadingView({ progress }: LoadingViewProps) {
+  const { t } = useTranslation();
+
   const getEmoji = (stage: string) => {
     switch (stage) {
       case 'identifying':
@@ -62,7 +65,7 @@ export function LoadingView({ progress }: LoadingViewProps) {
             }`}
           >
             <div className="text-2xl mb-1">🔍</div>
-            <p className="text-xs text-gray-600">Identifying</p>
+            <p className="text-xs text-gray-600">{t('loading.identifying')}</p>
           </div>
           <div
             className={`flex flex-col items-center ${
@@ -70,7 +73,7 @@ export function LoadingView({ progress }: LoadingViewProps) {
             }`}
           >
             <div className="text-2xl mb-1">🎯</div>
-            <p className="text-xs text-gray-600">Analyzing</p>
+            <p className="text-xs text-gray-600">{t('loading.analyzing')}</p>
           </div>
           <div
             className={`flex flex-col items-center ${
@@ -78,7 +81,7 @@ export function LoadingView({ progress }: LoadingViewProps) {
             }`}
           >
             <div className="text-2xl mb-1">🍬</div>
-            <p className="text-xs text-gray-600">Estimating</p>
+            <p className="text-xs text-gray-600">{t('loading.estimating')}</p>
           </div>
         </div>
 

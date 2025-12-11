@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Upload, Loader2 } from 'lucide-react';
 import { processImageForAI, validateImageFile } from '../../services/imageProcessor';
 
@@ -8,6 +9,7 @@ interface CameraViewProps {
 }
 
 export function CameraView({ onImageCapture, isProcessing }: CameraViewProps) {
+  const { t } = useTranslation();
   const [error, setError] = useState<string | null>(null);
   const [isCompressing, setIsCompressing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -52,10 +54,10 @@ export function CameraView({ onImageCapture, isProcessing }: CameraViewProps) {
         <div className="mb-8">
           <div className="text-8xl mb-4 animate-bounce">🍓</div>
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
-            Sweet Fruit
+            {t('app.title')}
           </h1>
           <p className="text-gray-600">
-            AI-powered fruit sweetness analyzer
+            {t('app.subtitle')}
           </p>
         </div>
 
@@ -63,7 +65,7 @@ export function CameraView({ onImageCapture, isProcessing }: CameraViewProps) {
         <div className="mb-8 p-6 bg-white rounded-2xl shadow-lg">
           <div className="flex items-center justify-center gap-3 text-gray-700 mb-4">
             <span className="text-3xl">📸</span>
-            <span className="text-lg font-medium">Take a photo of your fruit</span>
+            <span className="text-lg font-medium">{t('camera.title')}</span>
           </div>
           <div className="flex justify-center gap-4 text-4xl">
             🍎 🍌 🍊 🍇 🍓 🍉
@@ -80,12 +82,12 @@ export function CameraView({ onImageCapture, isProcessing }: CameraViewProps) {
             {isLoading ? (
               <>
                 <Loader2 className="w-6 h-6 animate-spin" />
-                {isCompressing ? 'Compressing...' : 'Analyzing...'}
+                {isCompressing ? t('camera.compressing') : t('camera.analyzing')}
               </>
             ) : (
               <>
                 <Upload className="w-6 h-6" />
-                Choose Photo
+                {t('camera.uploadButton')}
               </>
             )}
           </button>
@@ -110,7 +112,7 @@ export function CameraView({ onImageCapture, isProcessing }: CameraViewProps) {
         {/* Instructions */}
         <div className="mt-8 p-4 bg-white/50 rounded-lg">
           <p className="text-sm text-gray-600">
-            💡 <strong>Tip:</strong> Take a clear photo with good lighting for best results
+            💡 <strong>{t('camera.tip')}:</strong> {t('camera.tipText')}
           </p>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { FruitAnalysis } from '../../types/fruit';
 import { Camera, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
@@ -9,6 +10,7 @@ interface ResultViewProps {
 }
 
 export function ResultView({ analysis, onReset }: ResultViewProps) {
+  const { t } = useTranslation();
   const [showDetails, setShowDetails] = useState(false);
 
   const { fruit, ripeness, sweetness } = analysis;
@@ -52,7 +54,7 @@ export function ResultView({ analysis, onReset }: ResultViewProps) {
           <div className="text-6xl font-bold text-gray-800 mb-2">
             {sweetness.sweetness.score}
           </div>
-          <p className="text-xl text-gray-600 mb-4">SWEETNESS</p>
+          <p className="text-xl text-gray-600 mb-4">{t('results.sweetness').toUpperCase()}</p>
           <p className="text-lg font-semibold text-gray-700 mb-6">
             {sweetness.sweetness.label}
           </p>
@@ -61,7 +63,7 @@ export function ResultView({ analysis, onReset }: ResultViewProps) {
           <div className="flex items-center justify-center gap-2 mb-4">
             <span className="text-2xl">{ripeness.ripeness.emoji}</span>
             <span className="text-gray-700 font-medium capitalize">
-              {ripeness.ripeness.level} Ripeness
+              {ripeness.ripeness.level} {t('results.ripeness')}
             </span>
           </div>
 
@@ -70,7 +72,7 @@ export function ResultView({ analysis, onReset }: ResultViewProps) {
             <div className="flex items-center justify-center gap-2 mb-2">
               <span className="text-2xl">{sweetness.recommendation.emoji}</span>
               <span className="font-semibold text-gray-800">
-                Recommendation
+                {t('results.recommendation')}
               </span>
             </div>
             <p className="text-gray-700">{sweetness.recommendation.text}</p>
@@ -83,7 +85,7 @@ export function ResultView({ analysis, onReset }: ResultViewProps) {
           className="w-full bg-white shadow-xl px-6 py-4 flex items-center justify-center gap-2 text-gray-700 hover:bg-gray-50 transition-colors border-t-2 border-gray-100"
         >
           <span className="font-medium">
-            {showDetails ? 'Hide' : 'Show'} Details
+            {showDetails ? t('results.hideDetails') : t('results.showDetails')}
           </span>
           {showDetails ? (
             <ChevronUp className="w-5 h-5" />
@@ -168,7 +170,7 @@ export function ResultView({ analysis, onReset }: ResultViewProps) {
           className="w-full bg-white rounded-b-3xl shadow-xl px-6 py-4 text-green-600 hover:bg-green-50 font-semibold transition-colors flex items-center justify-center gap-2 border-t-2 border-gray-100"
         >
           <Camera className="w-5 h-5" />
-          Scan Another Fruit
+          {t('results.scanAnother')}
         </button>
       </motion.div>
     </div>
