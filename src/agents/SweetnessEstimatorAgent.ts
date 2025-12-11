@@ -7,8 +7,11 @@ import { getSweetnessEstimatorPrompt } from '../config/prompts';
  * Agent 3: Estimates sweetness based on fruit type and ripeness
  */
 export class SweetnessEstimatorAgent extends BaseAgent {
-  constructor(config: AgentConfig) {
+  private language: string;
+
+  constructor(config: AgentConfig, language: string = 'en') {
     super(config);
+    this.language = language;
   }
 
   /**
@@ -25,7 +28,8 @@ export class SweetnessEstimatorAgent extends BaseAgent {
         identification.fruit,
         ripeness.ripeness.level,
         ripeness.ripeness.score,
-        ripeness.quality.score
+        ripeness.quality.score,
+        this.language
       );
 
       // No image needed for sweetness estimation (text-only)

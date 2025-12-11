@@ -14,16 +14,16 @@ export class AgentOrchestrator {
   private ripenessAnalyzer: RipenessAnalyzerAgent;
   private sweetnessEstimator: SweetnessEstimatorAgent;
 
-  constructor(apiKey: string) {
+  constructor(apiKey: string, language: string = 'en') {
     const config: AgentConfig = {
       apiKey,
       model: 'claude-3-5-haiku-20241022',
       maxTokens: 1024
     };
 
-    this.identifier = new FruitIdentifierAgent(config);
-    this.ripenessAnalyzer = new RipenessAnalyzerAgent(config);
-    this.sweetnessEstimator = new SweetnessEstimatorAgent(config);
+    this.identifier = new FruitIdentifierAgent(config, language);
+    this.ripenessAnalyzer = new RipenessAnalyzerAgent(config, language);
+    this.sweetnessEstimator = new SweetnessEstimatorAgent(config, language);
   }
 
   /**

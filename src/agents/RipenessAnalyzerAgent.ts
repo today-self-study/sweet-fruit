@@ -7,8 +7,11 @@ import { getRipenessAnalyzerPrompt } from '../config/prompts';
  * Agent 2: Analyzes ripeness and quality of the fruit
  */
 export class RipenessAnalyzerAgent extends BaseAgent {
-  constructor(config: AgentConfig) {
+  private language: string;
+
+  constructor(config: AgentConfig, language: string = 'en') {
     super(config);
+    this.language = language;
   }
 
   /**
@@ -21,7 +24,7 @@ export class RipenessAnalyzerAgent extends BaseAgent {
     try {
       console.log(`🎯 Agent 2: Analyzing ${fruitName} ripeness...`);
 
-      const prompt = getRipenessAnalyzerPrompt(fruitName);
+      const prompt = getRipenessAnalyzerPrompt(fruitName, this.language);
       const response = await this.callClaude<RipenessAnalysis>(imageData, prompt);
 
       // Validate response structure

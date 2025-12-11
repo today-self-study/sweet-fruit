@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AgentOrchestrator } from '../agents/AgentOrchestrator';
 import { FruitAnalysis } from '../types/fruit';
 import { OrchestratorProgress } from '../types/agent';
@@ -16,6 +17,7 @@ interface UseAgentAnalysisReturn {
  * React Hook for using the multi-agent analysis system
  */
 export function useAgentAnalysis(apiKey: string | null): UseAgentAnalysisReturn {
+  const { i18n } = useTranslation();
   const [result, setResult] = useState<FruitAnalysis | null>(null);
   const [progress, setProgress] = useState<OrchestratorProgress | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -34,7 +36,7 @@ export function useAgentAnalysis(apiKey: string | null): UseAgentAnalysisReturn 
       setProgress(null);
 
       try {
-        const orchestrator = new AgentOrchestrator(apiKey);
+        const orchestrator = new AgentOrchestrator(apiKey, i18n.language);
 
         const analysis = await orchestrator.analyzeImage(imageData, (prog) => {
           setProgress(prog);
@@ -50,7 +52,7 @@ export function useAgentAnalysis(apiKey: string | null): UseAgentAnalysisReturn 
         return null;
       }
     },
-    [apiKey]
+    [apiKey, i18n.language]
   );
 
   const reset = useCallback(() => {

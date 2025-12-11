@@ -1,14 +1,17 @@
 import { BaseAgent } from './BaseAgent';
 import { FruitIdentification } from '../types/fruit';
 import { AgentConfig, FruitIdentifierResponse } from '../types/agent';
-import { FRUIT_IDENTIFIER_PROMPT } from '../config/prompts';
+import { getFruitIdentifierPrompt } from '../config/prompts';
 
 /**
  * Agent 1: Identifies the type of fruit from an image
  */
 export class FruitIdentifierAgent extends BaseAgent {
-  constructor(config: AgentConfig) {
+  private language: string;
+
+  constructor(config: AgentConfig, language: string = 'en') {
     super(config);
+    this.language = language;
   }
 
   /**
@@ -18,9 +21,10 @@ export class FruitIdentifierAgent extends BaseAgent {
     try {
       console.log('🔍 Agent 1: Identifying fruit...');
 
+      const prompt = getFruitIdentifierPrompt(this.language);
       const response = await this.callClaude<FruitIdentification>(
         imageData,
-        FRUIT_IDENTIFIER_PROMPT
+        prompt
       );
 
       // Validate response
