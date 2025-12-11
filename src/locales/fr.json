@@ -19,6 +19,7 @@
     "complete": "Analyse terminée"
   },
   "results": {
+    "overallQuality": "Qualité Globale",
     "fruit": "Fruit",
     "variety": "Variété",
     "confidence": "Confiance",
@@ -65,5 +66,12 @@
     "fair": "Passable",
     "good": "Bon",
     "excellent": "Excellent"
+  },
+  "quality": {
+    "excellent": "Excellent",
+    "good": "Bon",
+    "fair": "Passable",
+    "poor": "Mauvais",
+    "inedible": "Non Recommandé"
   }
 }

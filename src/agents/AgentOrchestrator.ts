@@ -1,7 +1,7 @@
 import { FruitIdentifierAgent } from './FruitIdentifierAgent';
 import { RipenessAnalyzerAgent } from './RipenessAnalyzerAgent';
 import { SweetnessEstimatorAgent } from './SweetnessEstimatorAgent';
-import { FruitAnalysis } from '../types/fruit';
+import { FruitAnalysis, OverallQuality } from '../types/fruit';
 import { AgentConfig, OrchestratorProgress } from '../types/agent';
 
 export type ProgressCallback = (progress: OrchestratorProgress) => void;
@@ -107,15 +107,25 @@ export class AgentOrchestrator {
         progress: 100
       });
 
+      // Calculate overall quality score
+      const overallQuality = this.calculateOverallQuality(
+        ripeness.quality.score,
+        ripeness.ripeness.score,
+        ripeness.quality.defects.length,
+        ripeness.quality.freshness
+      );
+
       // Combine all results
       const analysis: FruitAnalysis = {
         fruit: identification,
         ripeness,
         sweetness,
+        overall_quality: overallQuality,
         timestamp: new Date().toISOString()
       };
 
       console.log('✅ Multi-agent analysis complete!');
+      console.log(`📊 Overall Quality: ${overallQuality.score}/100 (${overallQuality.grade})`);
       return analysis;
     } catch (error: any) {
       console.error('❌ Analysis failed:', error);
@@ -128,6 +138,72 @@ export class AgentOrchestrator {
 
       throw error;
     }
+  }
+
+  /**
+   * Calculate overall quality score based on multiple factors
+   */
+  private calculateOverallQuality(
+    qualityScore: number,
+    ripenessScore: number,
+    defectCount: number,
+    freshness: string
+  ): OverallQuality {
+    // Base score from quality assessment
+    let score = qualityScore;
+
+    // Penalty for defects (곰팡이, 상처 등)
+    if (defectCount > 0) {
+      score = Math.max(0, score - (defectCount * 15)); // 결함당 -15점
+    }
+
+    // Freshness adjustment
+    const freshnessMultiplier = {
+      'excellent': 1.0,
+      'good': 0.9,
+      'fair': 0.7,
+      'poor': 0.4
+    }[freshness] || 0.5;
+    score = score * freshnessMultiplier;
+
+    // Ripeness factor (극도로 덜 익었거나 과숙하면 감점)
+    if (ripenessScore < 40) {
+      score = score * 0.7; // 너무 덜 익음
+    } else if (ripenessScore < 60) {
+      score = score * 0.85; // 약간 덜 익음
+    }
+
+    // Final score
+    score = Math.round(Math.max(0, Math.min(100, score)));
+
+    // Determine grade and emoji
+    let grade: OverallQuality['grade'];
+    let emoji: string;
+    let label: string;
+
+    if (score >= 85) {
+      grade = 'excellent';
+      emoji = '🌟';
+      label = 'Excellent Quality';
+    } else if (score >= 70) {
+      grade = 'good';
+      emoji = '😊';
+      label = 'Good Quality';
+    } else if (score >= 50) {
+      grade = 'fair';
+      emoji = '😐';
+      label = 'Fair Quality';
+    } else if (score >= 30) {
+      grade = 'poor';
+      emoji = '😞';
+      label = 'Poor Quality';
+    } else {
+      grade = 'inedible';
+      emoji = '⚠️';
+      label = 'Not Recommended';
+    }
+
+    return { score, grade, emoji, label };
   }
 
   /**

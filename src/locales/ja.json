@@ -19,6 +19,7 @@
     "complete": "分析完了"
   },
   "results": {
+    "overallQuality": "総合品質",
     "fruit": "果物",
     "variety": "品種",
     "confidence": "信頼度",
@@ -65,5 +66,12 @@
     "fair": "普通",
     "good": "良い",
     "excellent": "優秀"
+  },
+  "quality": {
+    "excellent": "優秀",
+    "good": "良好",
+    "fair": "普通",
+    "poor": "不良",
+    "inedible": "摂取非推奨"
   }
 }

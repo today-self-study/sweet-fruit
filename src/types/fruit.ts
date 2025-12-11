@@ -55,6 +55,13 @@ export interface Recommendation {
   alternatives?: string[];
 }
 
+export interface OverallQuality {
+  score: number; // 0-100 종합 품질 점수
+  grade: 'excellent' | 'good' | 'fair' | 'poor' | 'inedible'; // 등급
+  emoji: string; // 🌟 😊 😐 😞 ⚠️
+  label: string; // "Excellent Quality"
+}
+
 export interface SweetnessEstimate {
   sweetness: SweetnessScore;
   recommendation: Recommendation;
@@ -65,6 +72,7 @@ export interface FruitAnalysis {
   fruit: FruitIdentification;
   ripeness: RipenessAnalysis;
   sweetness: SweetnessEstimate;
+  overall_quality: OverallQuality; // 새로 추가: 종합 품질 점수
   timestamp: string;
 }
 

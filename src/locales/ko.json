@@ -22,6 +22,7 @@
     "fruit": "과일",
     "variety": "품종",
     "confidence": "신뢰도",
+    "overallQuality": "종합 품질",
     "sweetness": "당도",
     "ripeness": "숙성도",
     "quality": "품질",
@@ -40,6 +41,13 @@
     "scanAnother": "다른 과일 스캔",
     "showDetails": "상세 정보 보기",
     "hideDetails": "상세 정보 숨기기"
+  },
+  "quality": {
+    "excellent": "훌륭함",
+    "good": "좋음",
+    "fair": "보통",
+    "poor": "나쁨",
+    "inedible": "섭취 비권장"
   },
   "errors": {
     "invalidImage": "유효하지 않은 이미지 파일",

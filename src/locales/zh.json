@@ -19,6 +19,7 @@
     "complete": "分析完成"
   },
   "results": {
+    "overallQuality": "综合质量",
     "fruit": "水果",
     "variety": "品种",
     "confidence": "置信度",
@@ -65,5 +66,12 @@
     "fair": "一般",
     "good": "好",
     "excellent": "优秀"
+  },
+  "quality": {
+    "excellent": "优秀",
+    "good": "良好",
+    "fair": "一般",
+    "poor": "较差",
+    "inedible": "不建议食用"
   }
 }

@@ -13,20 +13,21 @@ export function ResultView({ analysis, onReset }: ResultViewProps) {
   const { t } = useTranslation();
   const [showDetails, setShowDetails] = useState(false);
 
-  const { fruit, ripeness, sweetness } = analysis;
+  const { fruit, ripeness, sweetness, overall_quality } = analysis;
 
-  // Determine background color based on sweetness
+  // Determine background color based on overall quality
   const getBgGradient = (score: number) => {
-    if (score <= 40) return 'from-gray-100 to-gray-200';
-    if (score <= 60) return 'from-yellow-100 to-yellow-200';
-    if (score <= 80) return 'from-orange-100 to-orange-200';
-    return 'from-green-100 to-yellow-200';
+    if (score < 30) return 'from-red-100 to-red-200'; // Inedible - red
+    if (score < 50) return 'from-orange-100 to-red-100'; // Poor - orange/red
+    if (score < 70) return 'from-yellow-100 to-orange-100'; // Fair - yellow/orange
+    if (score < 85) return 'from-green-100 to-yellow-100'; // Good - green/yellow
+    return 'from-green-200 to-emerald-200'; // Excellent - bright green
   };
 
   return (
     <div
       className={`min-h-screen bg-gradient-to-br ${getBgGradient(
-        sweetness.sweetness.score
+        overall_quality.score
       )} flex items-center justify-center p-4`}
     >
       <motion.div
@@ -48,15 +49,15 @@ export function ResultView({ analysis, onReset }: ResultViewProps) {
           </div>
         </div>
 
-        {/* Sweetness Score */}
+        {/* Overall Quality Score - MAIN */}
         <div className="bg-white shadow-xl px-6 py-8 text-center border-t-2 border-gray-100">
-          <div className="text-8xl mb-4">{sweetness.sweetness.emoji}</div>
+          <div className="text-8xl mb-4">{overall_quality.emoji}</div>
           <div className="text-6xl font-bold text-gray-800 mb-2">
-            {sweetness.sweetness.score}
+            {overall_quality.score}
           </div>
-          <p className="text-xl text-gray-600 mb-4">{t('results.sweetness').toUpperCase()}</p>
+          <p className="text-xl text-gray-600 mb-4">{t('results.overallQuality').toUpperCase()}</p>
           <p className="text-lg font-semibold text-gray-700 mb-6">
-            {sweetness.sweetness.label}
+            {t(`quality.${overall_quality.grade}`)}
           </p>
 
           {/* Ripeness Indicator */}
@@ -67,8 +68,14 @@ export function ResultView({ analysis, onReset }: ResultViewProps) {
             </span>
           </div>
 
-          {/* Recommendation */}
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+          {/* Recommendation - Based on Overall Quality */}
+          <div className={`${
+            overall_quality.score < 30
+              ? 'bg-red-50 border-red-200'
+              : overall_quality.score < 50
+              ? 'bg-orange-50 border-orange-200'
+              : 'bg-green-50 border-green-200'
+          } border rounded-lg p-4`}>
             <div className="flex items-center justify-center gap-2 mb-2">
               <span className="text-2xl">{sweetness.recommendation.emoji}</span>
               <span className="font-semibold text-gray-800">
@@ -104,10 +111,30 @@ export function ResultView({ analysis, onReset }: ResultViewProps) {
               className="bg-white shadow-xl overflow-hidden"
             >
               <div className="p-6 space-y-4 border-t-2 border-gray-100">
+                {/* Sweetness Score - Now in Details */}
+                <div>
+                  <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                    <span className="text-xl">{sweetness.sweetness.emoji}</span>
+                    {t('results.sweetness')}
+                  </h4>
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="flex-1 bg-gray-200 rounded-full h-2">
+                      <div
+                        className="bg-yellow-500 h-2 rounded-full"
+                        style={{ width: `${sweetness.sweetness.score}%` }}
+                      />
+                    </div>
+                    <span className="text-sm font-medium text-gray-700">
+                      {sweetness.sweetness.score}/100
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-600">{sweetness.sweetness.label}</p>
+                </div>
+
                 {/* Quality Score */}
                 <div>
                   <h4 className="font-semibold text-gray-800 mb-2">
-                    Quality Score
+                    {t('results.quality')} Score
                   </h4>
                   <div className="flex items-center gap-3">
                     <div className="flex-1 bg-gray-200 rounded-full h-2">
@@ -125,22 +152,23 @@ export function ResultView({ analysis, onReset }: ResultViewProps) {
                 {/* Visual Assessment */}
                 <div>
                   <h4 className="font-semibold text-gray-800 mb-2">
-                    Visual Assessment
+                    {t('results.visualAssessment')}
                   </h4>
                   <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• Color: {ripeness.visual_assessment.color}</li>
-                    <li>• Texture: {ripeness.visual_assessment.texture}</li>
-                    <li>• Blemishes: {ripeness.visual_assessment.blemishes}</li>
+                    <li>• {t('results.color')}: {ripeness.visual_assessment.color}</li>
+                    <li>• {t('results.texture')}: {ripeness.visual_assessment.texture}</li>
+                    <li>• {t('results.blemishes')}: {ripeness.visual_assessment.blemishes}</li>
                   </ul>
                 </div>
 
                 {/* Defects */}
                 {ripeness.quality.defects.length > 0 && (
-                  <div>
-                    <h4 className="font-semibold text-gray-800 mb-2">
-                      Defects Found
+                  <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+                    <h4 className="font-semibold text-red-800 mb-2 flex items-center gap-2">
+                      <span>⚠️</span>
+                      {t('results.defects')} ({ripeness.quality.defects.length})
                     </h4>
-                    <ul className="text-sm text-red-600 space-y-1">
+                    <ul className="text-sm text-red-700 space-y-1">
                       {ripeness.quality.defects.map((defect, i) => (
                         <li key={i}>• {defect}</li>
                       ))}
@@ -152,13 +180,23 @@ export function ResultView({ analysis, onReset }: ResultViewProps) {
                 {sweetness.taste_notes && (
                   <div>
                     <h4 className="font-semibold text-gray-800 mb-2">
-                      Taste Notes
+                      {t('results.tasteNotes')}
                     </h4>
                     <p className="text-sm text-gray-600">
                       {sweetness.taste_notes}
                     </p>
                   </div>
                 )}
+
+                {/* Freshness */}
+                <div>
+                  <h4 className="font-semibold text-gray-800 mb-2">
+                    {t('results.freshness')}
+                  </h4>
+                  <p className="text-sm text-gray-600 capitalize">
+                    {t(`freshness.${ripeness.quality.freshness}`)}
+                  </p>
+                </div>
               </div>
             </motion.div>
           )}
