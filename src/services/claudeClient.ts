@@ -71,7 +71,7 @@ export class ClaudeClient {
   }
 
   /**
-   * Parse JSON response from Claude, handling markdown code blocks
+   * Parse JSON response from Claude, handling markdown code blocks and extra text
    */
   parseJsonResponse<T>(response: string): T {
     try {
@@ -84,7 +84,33 @@ export class ClaudeClient {
         cleaned = cleaned.replace(/^```\s*/, '').replace(/\s*```$/, '');
       }
 
-      return JSON.parse(cleaned.trim());
+      // Find the JSON object - look for balanced braces
+      const firstBrace = cleaned.indexOf('{');
+      if (firstBrace === -1) {
+        throw new Error('No JSON object found in response');
+      }
+
+      // Find matching closing brace
+      let braceCount = 0;
+      let lastBrace = -1;
+      for (let i = firstBrace; i < cleaned.length; i++) {
+        if (cleaned[i] === '{') braceCount++;
+        if (cleaned[i] === '}') {
+          braceCount--;
+          if (braceCount === 0) {
+            lastBrace = i;
+            break;
+          }
+        }
+      }
+
+      if (lastBrace === -1) {
+        throw new Error('Unbalanced braces in JSON response');
+      }
+
+      // Extract just the JSON object
+      const jsonString = cleaned.substring(firstBrace, lastBrace + 1);
+      return JSON.parse(jsonString);
     } catch (error: any) {
       console.error('JSON Parse Error:', error);
       console.error('Raw response:', response);
