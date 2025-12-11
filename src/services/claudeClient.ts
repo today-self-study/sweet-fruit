@@ -119,15 +119,71 @@ export class ClaudeClient {
   }
 
   /**
-   * Send message and parse JSON response
+   * Send message with JSON schema for structured output
    */
   async sendMessageJson<T>(
     prompt: string,
     imageData?: string,
-    maxTokens: number = 1024
+    maxTokens: number = 1024,
+    schema?: any
   ): Promise<T> {
-    const response = await this.sendMessage(prompt, imageData, maxTokens);
-    return this.parseJsonResponse<T>(response);
+    try {
+      const content: any[] = [];
+
+      // Add image if provided
+      if (imageData) {
+        const base64Data = imageData.includes(',')
+          ? imageData.split(',')[1]
+          : imageData;
+
+        content.push({
+          type: 'image',
+          source: {
+            type: 'base64',
+            media_type: 'image/jpeg',
+            data: base64Data
+          }
+        });
+      }
+
+      // Add text prompt with explicit JSON instruction
+      content.push({
+        type: 'text',
+        text: prompt + '\n\nRespond with ONLY valid JSON, no additional text or explanation.'
+      });
+
+      const messageParams: any = {
+        model: this.model,
+        max_tokens: maxTokens,
+        messages: [
+          {
+            role: 'user',
+            content
+          }
+        ]
+      };
+
+      // Use response format for JSON mode if available
+      if (schema) {
+        messageParams.response_format = {
+          type: 'json_schema',
+          json_schema: schema
+        };
+      }
+
+      const response = await this.client.messages.create(messageParams);
+
+      // Extract text from response
+      const textContent = response.content.find((block) => block.type === 'text');
+      if (!textContent || textContent.type !== 'text') {
+        throw new Error('No text content in response');
+      }
+
+      return this.parseJsonResponse<T>(textContent.text);
+    } catch (error: any) {
+      console.error('Claude API Error:', error);
+      throw new Error(`Claude API failed: ${error.message}`);
+    }
   }
 }
 

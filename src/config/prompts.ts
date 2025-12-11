@@ -3,14 +3,15 @@
 export const FRUIT_IDENTIFIER_PROMPT = `You are a fruit identification expert. Analyze this image and identify the fruit.
 
 Rules:
-- Respond ONLY with valid JSON (no markdown, no code blocks)
 - If multiple fruits visible, identify the most prominent one
 - Include confidence score (0-100)
 - Be specific about variety if visible
 
 Known fruits: apple, banana, orange, grape, strawberry, watermelon, pineapple, mango, kiwi, peach, pear, cherry, blueberry, lemon, lime, coconut, avocado, tomato
 
-Response format:
+CRITICAL: You MUST respond with ONLY the JSON object below. Do NOT include any reasoning, explanation, or additional text before or after the JSON. Your entire response must be valid JSON that can be parsed directly.
+
+Response format (respond with EXACTLY this structure, nothing else):
 {
   "fruit": "apple",
   "variety": "red delicious",
@@ -36,11 +37,17 @@ Analyze this ${fruitName} image for:
 3. Freshness indicators (color, texture, spots)
 
 Rules:
-- Respond ONLY with valid JSON (no markdown, no code blocks)
 - Score quality 0-100 (100 = perfect condition)
 - Be specific about visual defects
 
-Response format:
+Ripeness level guidelines:
+- unripe: 🔴 (needs time to ripen, hard, pale color)
+- perfect: 🟢 (ready to eat now, optimal color and firmness)
+- overripe: 🟡 (eat soon or use in cooking, soft spots, darkening)
+
+CRITICAL: You MUST respond with ONLY the JSON object below. Do NOT include any reasoning, explanation, or additional text before or after the JSON. Your entire response must be valid JSON that can be parsed directly.
+
+Response format (respond with EXACTLY this structure, nothing else):
 {
   "ripeness": {
     "level": "perfect",
@@ -58,12 +65,7 @@ Response format:
     "texture": "smooth and firm",
     "blemishes": "none visible"
   }
-}
-
-Ripeness level guidelines:
-- unripe: 🔴 (needs time to ripen, hard, pale color)
-- perfect: 🟢 (ready to eat now, optimal color and firmness)
-- overripe: 🟡 (eat soon or use in cooking, soft spots, darkening)`;
+}`;
 }
 
 export function getSweetnessEstimatorPrompt(
@@ -101,9 +103,10 @@ Rules:
 - Unripe = 60-80% of maximum sweetness
 - Overripe = 90-110% of maximum (sweeter but mushy)
 - Lower quality reduces sweetness by up to 20%
-- Respond ONLY with valid JSON (no markdown, no code blocks)
 
-Response format:
+CRITICAL: You MUST respond with ONLY the JSON object below. Do NOT include any reasoning, explanation, or additional text before or after the JSON. Your entire response must be valid JSON that can be parsed directly.
+
+Response format (respond with EXACTLY this structure, nothing else):
 {
   "sweetness": {
     "score": 85,
