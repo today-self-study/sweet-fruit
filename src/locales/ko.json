@@ -1,0 +1,69 @@
+{
+  "app": {
+    "title": "스위트 프루트",
+    "subtitle": "AI 기반 과일 당도 분석기"
+  },
+  "camera": {
+    "title": "과일 사진을 찍어주세요",
+    "uploadButton": "사진 선택",
+    "uploading": "업로드 중...",
+    "compressing": "압축 중...",
+    "analyzing": "분석 중...",
+    "tip": "팁",
+    "tipText": "좋은 조명에서 선명한 사진을 찍으면 최상의 결과를 얻을 수 있습니다"
+  },
+  "loading": {
+    "identifying": "과일 식별 중",
+    "analyzing": "숙성도 및 품질 분석 중",
+    "estimating": "당도 계산 중",
+    "complete": "분석 완료"
+  },
+  "results": {
+    "fruit": "과일",
+    "variety": "품종",
+    "confidence": "신뢰도",
+    "sweetness": "당도",
+    "ripeness": "숙성도",
+    "quality": "품질",
+    "recommendation": "추천",
+    "details": "상세 정보",
+    "visualAssessment": "외관 평가",
+    "color": "색상",
+    "texture": "질감",
+    "blemishes": "흠집",
+    "defects": "결함",
+    "freshness": "신선도",
+    "indicators": "지표",
+    "brixEstimate": "당도 측정치",
+    "comparedToAverage": "평균 대비",
+    "tasteNotes": "맛 노트",
+    "scanAnother": "다른 과일 스캔",
+    "showDetails": "상세 정보 보기",
+    "hideDetails": "상세 정보 숨기기"
+  },
+  "errors": {
+    "invalidImage": "유효하지 않은 이미지 파일",
+    "fileTooLarge": "파일이 너무 큽니다 (최대 10MB)",
+    "unsupportedFormat": "지원되지 않는 파일 형식",
+    "analysisFailed": "분석 실패. 다시 시도해주세요.",
+    "noFruitDetected": "이미지에서 과일을 감지하지 못했습니다"
+  },
+  "sweetness": {
+    "notSweet": "달지 않음",
+    "slightlySweet": "약간 달콤함",
+    "moderatelySweet": "적당히 달콤함",
+    "sweet": "달콤함",
+    "verySweet": "매우 달콤함"
+  },
+  "ripeness": {
+    "unripe": "덜 익음",
+    "perfect": "완벽함",
+    "overripe": "과숙함"
+  },
+  "freshness": {
+    "poor": "나쁨",
+    "fair": "보통",
+    "good": "좋음",
+    "excellent": "훌륭함"
+  }
+}

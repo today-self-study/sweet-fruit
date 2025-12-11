@@ -1,0 +1,69 @@
+{
+  "app": {
+    "title": "Sweet Fruit",
+    "subtitle": "AI-powered fruit sweetness analyzer"
+  },
+  "camera": {
+    "title": "Take a photo of your fruit",
+    "uploadButton": "Choose Photo",
+    "uploading": "Uploading...",
+    "compressing": "Compressing...",
+    "analyzing": "Analyzing...",
+    "tip": "Tip",
+    "tipText": "Take a clear photo with good lighting for best results"
+  },
+  "loading": {
+    "identifying": "Identifying fruit",
+    "analyzing": "Analyzing ripeness and quality",
+    "estimating": "Calculating sweetness",
+    "complete": "Analysis complete"
+  },
+  "results": {
+    "fruit": "Fruit",
+    "variety": "Variety",
+    "confidence": "Confidence",
+    "sweetness": "Sweetness",
+    "ripeness": "Ripeness",
+    "quality": "Quality",
+    "recommendation": "Recommendation",
+    "details": "Details",
+    "visualAssessment": "Visual Assessment",
+    "color": "Color",
+    "texture": "Texture",
+    "blemishes": "Blemishes",
+    "defects": "Defects",
+    "freshness": "Freshness",
+    "indicators": "Indicators",
+    "brixEstimate": "Brix Estimate",
+    "comparedToAverage": "Compared to Average",
+    "tasteNotes": "Taste Notes",
+    "scanAnother": "Scan Another Fruit",
+    "showDetails": "Show Details",
+    "hideDetails": "Hide Details"
+  },
+  "errors": {
+    "invalidImage": "Invalid image file",
+    "fileTooLarge": "File too large (max 10MB)",
+    "unsupportedFormat": "Unsupported file format",
+    "analysisFailed": "Analysis failed. Please try again.",
+    "noFruitDetected": "No fruit detected in image"
+  },
+  "sweetness": {
+    "notSweet": "Not Sweet",
+    "slightlySweet": "Slightly Sweet",
+    "moderatelySweet": "Moderately Sweet",
+    "sweet": "Sweet",
+    "verySweet": "Very Sweet"
+  },
+  "ripeness": {
+    "unripe": "Unripe",
+    "perfect": "Perfect",
+    "overripe": "Overripe"
+  },
+  "freshness": {
+    "poor": "Poor",
+    "fair": "Fair",
+    "good": "Good",
+    "excellent": "Excellent"
+  }
+}

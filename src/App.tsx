@@ -2,6 +2,7 @@ import { useAgentAnalysis } from './hooks/useAgentAnalysis';
 import { CameraView } from './components/Camera/CameraView';
 import { LoadingView } from './components/Results/LoadingView';
 import { ResultView } from './components/Results/ResultView';
+import { LanguageSelector } from './components/LanguageSelector/LanguageSelector';
 
 type AppState = 'camera' | 'analyzing' | 'results';
 
@@ -34,16 +35,27 @@ function App() {
 
   // Render based on state
   if (currentState === 'analyzing') {
-    return <LoadingView progress={progress} />;
+    return (
+      <>
+        <LanguageSelector />
+        <LoadingView progress={progress} />
+      </>
+    );
   }
 
   if (currentState === 'results' && result) {
-    return <ResultView analysis={result} onReset={handleReset} />;
+    return (
+      <>
+        <LanguageSelector />
+        <ResultView analysis={result} onReset={handleReset} />
+      </>
+    );
   }
 
   // Default: camera view
   return (
     <>
+      <LanguageSelector />
       <CameraView onImageCapture={handleImageCapture} isProcessing={isAnalyzing} />
       {error && (
         <div className="fixed bottom-4 left-4 right-4 max-w-md mx-auto bg-red-50 border border-red-200 rounded-lg p-4 shadow-lg">

@@ -1,0 +1,69 @@
+{
+  "app": {
+    "title": "甜果",
+    "subtitle": "AI驱动的水果甜度分析仪"
+  },
+  "camera": {
+    "title": "拍摄水果照片",
+    "uploadButton": "选择照片",
+    "uploading": "上传中...",
+    "compressing": "压缩中...",
+    "analyzing": "分析中...",
+    "tip": "提示",
+    "tipText": "在良好的光线下拍摄清晰的照片可获得最佳效果"
+  },
+  "loading": {
+    "identifying": "识别水果中",
+    "analyzing": "分析成熟度和质量",
+    "estimating": "计算甜度中",
+    "complete": "分析完成"
+  },
+  "results": {
+    "fruit": "水果",
+    "variety": "品种",
+    "confidence": "置信度",
+    "sweetness": "甜度",
+    "ripeness": "成熟度",
+    "quality": "质量",
+    "recommendation": "建议",
+    "details": "详情",
+    "visualAssessment": "外观评估",
+    "color": "颜色",
+    "texture": "质地",
+    "blemishes": "瑕疵",
+    "defects": "缺陷",
+    "freshness": "新鲜度",
+    "indicators": "指标",
+    "brixEstimate": "糖度估计",
+    "comparedToAverage": "与平均值比较",
+    "tasteNotes": "口味说明",
+    "scanAnother": "扫描其他水果",
+    "showDetails": "显示详情",
+    "hideDetails": "隐藏详情"
+  },
+  "errors": {
+    "invalidImage": "无效的图像文件",
+    "fileTooLarge": "文件太大（最大10MB）",
+    "unsupportedFormat": "不支持的文件格式",
+    "analysisFailed": "分析失败。请重试。",
+    "noFruitDetected": "图像中未检测到水果"
+  },
+  "sweetness": {
+    "notSweet": "不甜",
+    "slightlySweet": "微甜",
+    "moderatelySweet": "中等甜度",
+    "sweet": "甜",
+    "verySweet": "非常甜"
+  },
+  "ripeness": {
+    "unripe": "未熟",
+    "perfect": "完美",
+    "overripe": "过熟"
+  },
+  "freshness": {
+    "poor": "差",
+    "fair": "一般",
+    "good": "好",
+    "excellent": "优秀"
+  }
+}

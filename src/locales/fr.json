@@ -1,0 +1,69 @@
+{
+  "app": {
+    "title": "Fruit Sucré",
+    "subtitle": "Analyseur de douceur des fruits alimenté par l'IA"
+  },
+  "camera": {
+    "title": "Prenez une photo de votre fruit",
+    "uploadButton": "Choisir une photo",
+    "uploading": "Téléchargement...",
+    "compressing": "Compression...",
+    "analyzing": "Analyse...",
+    "tip": "Conseil",
+    "tipText": "Prenez une photo claire avec un bon éclairage pour de meilleurs résultats"
+  },
+  "loading": {
+    "identifying": "Identification du fruit",
+    "analyzing": "Analyse de la maturité et de la qualité",
+    "estimating": "Calcul de la douceur",
+    "complete": "Analyse terminée"
+  },
+  "results": {
+    "fruit": "Fruit",
+    "variety": "Variété",
+    "confidence": "Confiance",
+    "sweetness": "Douceur",
+    "ripeness": "Maturité",
+    "quality": "Qualité",
+    "recommendation": "Recommandation",
+    "details": "Détails",
+    "visualAssessment": "Évaluation visuelle",
+    "color": "Couleur",
+    "texture": "Texture",
+    "blemishes": "Défauts",
+    "defects": "Imperfections",
+    "freshness": "Fraîcheur",
+    "indicators": "Indicateurs",
+    "brixEstimate": "Estimation Brix",
+    "comparedToAverage": "Par rapport à la moyenne",
+    "tasteNotes": "Notes gustatives",
+    "scanAnother": "Scanner un autre fruit",
+    "showDetails": "Afficher les détails",
+    "hideDetails": "Masquer les détails"
+  },
+  "errors": {
+    "invalidImage": "Fichier image invalide",
+    "fileTooLarge": "Fichier trop volumineux (max 10 Mo)",
+    "unsupportedFormat": "Format de fichier non pris en charge",
+    "analysisFailed": "L'analyse a échoué. Veuillez réessayer.",
+    "noFruitDetected": "Aucun fruit détecté dans l'image"
+  },
+  "sweetness": {
+    "notSweet": "Pas sucré",
+    "slightlySweet": "Légèrement sucré",
+    "moderatelySweet": "Modérément sucré",
+    "sweet": "Sucré",
+    "verySweet": "Très sucré"
+  },
+  "ripeness": {
+    "unripe": "Pas mûr",
+    "perfect": "Parfait",
+    "overripe": "Trop mûr"
+  },
+  "freshness": {
+    "poor": "Mauvais",
+    "fair": "Passable",
+    "good": "Bon",
+    "excellent": "Excellent"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "app": {
+    "title": "スイートフルーツ",
+    "subtitle": "AI搭載フルーツ甘さ分析器"
+  },
+  "camera": {
+    "title": "果物の写真を撮ってください",
+    "uploadButton": "写真を選択",
+    "uploading": "アップロード中...",
+    "compressing": "圧縮中...",
+    "analyzing": "分析中...",
+    "tip": "ヒント",
+    "tipText": "良い照明で鮮明な写真を撮ると最良の結果が得られます"
+  },
+  "loading": {
+    "identifying": "果物を識別中",
+    "analyzing": "熟度と品質を分析中",
+    "estimating": "甘さを計算中",
+    "complete": "分析完了"
+  },
+  "results": {
+    "fruit": "果物",
+    "variety": "品種",
+    "confidence": "信頼度",
+    "sweetness": "甘さ",
+    "ripeness": "熟度",
+    "quality": "品質",
+    "recommendation": "おすすめ",
+    "details": "詳細",
+    "visualAssessment": "外観評価",
+    "color": "色",
+    "texture": "質感",
+    "blemishes": "傷",
+    "defects": "欠陥",
+    "freshness": "新鮮度",
+    "indicators": "指標",
+    "brixEstimate": "糖度推定値",
+    "comparedToAverage": "平均との比較",
+    "tasteNotes": "味のノート",
+    "scanAnother": "別の果物をスキャン",
+    "showDetails": "詳細を表示",
+    "hideDetails": "詳細を非表示"
+  },
+  "errors": {
+    "invalidImage": "無効な画像ファイル",
+    "fileTooLarge": "ファイルが大きすぎます（最大10MB）",
+    "unsupportedFormat": "サポートされていないファイル形式",
+    "analysisFailed": "分析に失敗しました。もう一度お試しください。",
+    "noFruitDetected": "画像から果物が検出されませんでした"
+  },
+  "sweetness": {
+    "notSweet": "甘くない",
+    "slightlySweet": "やや甘い",
+    "moderatelySweet": "程よく甘い",
+    "sweet": "甘い",
+    "verySweet": "とても甘い"
+  },
+  "ripeness": {
+    "unripe": "未熟",
+    "perfect": "完璧",
+    "overripe": "過熟"
+  },
+  "freshness": {
+    "poor": "悪い",
+    "fair": "普通",
+    "good": "良い",
+    "excellent": "優秀"
+  }
+}
